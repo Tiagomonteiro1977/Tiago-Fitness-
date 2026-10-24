@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiago Monteiro - Gym & Nutrition Blueprint</title>
+    <style>
+        @media print {
+            body { font-size: 10pt; background: #fff; color: #000; }
+            .no-print { display: none; }
+            .page-break { page-break-before: always; }
+            table { page-break-inside: avoid; }
+            .container { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+        }dding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            border-bottom: 3px solid #6366f1;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #0f172a;
+            font-size: 26pt;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            margin: 5px 0 0 0;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .badge {
+            background-color: #e0e7ff;
+            color: #3730a3;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 10pt;
+        }
+
+        .section-title {
+            color: #1e1b4b;
+            border-left: 4px solid #6366f1;
+            padding-left: 10px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 16pt;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: #f1f5f9;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #334155;
+            font-size: 12pt;
+            border-bottom: 1px solid #cbd5e1;
+            padding-bottom: 5px;
+        }
+
+        .card p, .card li {
+            font-size: 10pt;
+            color: #334155;
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-size: 9.5pt;
+        }
+
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 8px 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0f172a;
+            color: #ffffff;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 8.5pt;
+            letter-spacing: 0.5px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .col-ex { width: 32%; font-weight: 600; }
+        .col-set { width: 8%; text-align: center; }
+        .col-rep { width: 12%; text-align: center; }
+        .col-wk { width: 12%; text-align: center; background-color: #fff; }
+
+        .note-box {
+            background-color: #fffbeb;
+            border: 1px solid #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            font-size: 9.5pt;
+        }
+
+        .btn-print {
+            background: #6366f1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 11pt;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            float: right;
+        }
+
+        .btn-print:hover {
+            background: #4f46e5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <button class="btn-print no-print" onclick="window.print()">🖨️ Print Ledger</button>
+
+    <div class="header">
+        <div>
+            <h1>TIAGO MONTEIRO</h1>
+            <p>Custom Hypertrophy Blueprint & Workout Ledger | Planet Fitness Edition</p>
+        </div>
+        <div class="badge">InBody Profile: 175.7 lbs | 19.1% Fat</div>
+    </div>
+
+    <!-- SIMPLE FOOD GUIDE SECTION -->
+    <div class="section-title">1. Food Made Simple (How to Eat)</div>
+    <div class="note-box">
+        <strong>The Kid-Friendly Rule:</strong> Think of your body like a sports car. 
+        <strong>Protein</strong> builds the engine (muscle). 
+        <strong>Carbs</strong> are the gasoline (energy for running/biking). 
+        <strong>Fats</strong> keep the oil moving (healthy joints & hormones). 
+        Since you want to lose fat from your belly/waist while keeping your muscle, we eat <u>high protein</u> and <u>medium energy</u>!
+    </div>
+
+    <div class="grid-2">
+        <div class="card">
+            <h3>🥩 What to Eat (Your Daily Menu)</h3>
+            <ul>
+                <li><strong>Protein (Builds Muscle):</strong> Chicken breast, ground turkey, egg whites, steak, salmon, Greek yogurt, protein powder. <i>Target: Eat a palm-sized portion of protein 4-5 times a day.</i></li>
+                <li><strong>Carbs (Gives Energy):</strong> Oatmeal, white/brown rice, sweet potatoes, bananas, berries. <i>Eat these before and right after working out!</i></li>
+                <li><strong>Healthy Fats (Joints & Hormones):</strong> Whole eggs, almonds, avocado, olive oil.</li>
+                <li><strong>Veggies (Clean Gut):</strong> Asparagus, broccoli, spinach, cucumbers.</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>⏰ Simple Daily Eating Schedule</h3>
+            <ul>
+                <li><strong>Breakfast (Pre-Gym):</strong> 4 Egg whites + 2 whole eggs + 1/2 cup oatmeal + cinnamon.</li>
+                <li><strong>Post-Gym Snack:</strong> 1.5 scoops protein powder + 1 banana.</li>
+                <li><strong>Lunch:</strong> Palm of chicken or turkey + 1 cup rice + veggies.</li>
+                <li><strong>Mid-Afternoon Snack:</strong> 1 cup Greek yogurt + 10-12 almonds.</li>
+                <li><strong>Dinner:</strong> Steak or salmon + big green salad with olive oil.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- CARDIO & MOBILITY SCHEDULE -->
+    <div class="section-title">2. Cardio & Injury Safety Schedule</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>🏃 Running & 🚴 Biking Rules</h3>
+            <ul>
+                <li><strong>Tuesday:</strong> Fast Sprint Interval Run (3 miles total, treadmill).</li>
+                <li><strong>Wednesday:</strong> 5-Mile Steady Run (Sub-25 min target).</li>
+                <li><strong>Saturday:</strong> Long Road Bike Ride (40 to 75 miles).</li>
+                <li><i>Note: Do NOT run max speed on leg lifting days!</i></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>🚑 Shoulder & Hamstring Protection</h3>
+            <ul>
+                <li><strong>Tight Hamstrings & Lower Back Pain:</strong> Do 30 "Elephant Walks" and 2 minutes of wall hamstring stretches before doing leg exercises!</li>
+                <li><strong>Right Shoulder Pain:</strong> Always do 2 sets of light Cable Face Pulls before bench pressing. Never lower dumbbells past your chest.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- WORKOUT LEDGER SECTION -->
+    <div class="section-title">3. 4-Week Gym Tracking Ledger</div>
+    <p style="font-size: 9.5pt; color: #64748b;"><i>Write down the weight you used and how many reps you did (e.g., <strong>30lb / 10</strong>) in the week boxes below. Try to beat your numbers every week!</i></p>
+
+    <!-- DAY 1 -->
+    <h3>DAY 1: UPPER BODY A (Chest, Back & Shoulders)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th class="col-ex">Exercise Name</th>
+                <th class="col-set">Sets</th>
+                <th class="col-rep">Target Reps</th>
+                <th class="col-wk">Week 1</th>
+                <th class="col-wk">Week 2</th>
+                <th class="col-wk">Week 3</th>
+                <th class="col-wk">Week 4</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col-ex">Incline Dumbbell Press</td>
+                <td class="col-set">4</td>
+                <td class="col-rep">8 - 10</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="col-ex">Neutral-Grip Cable Rows</td>
+                <td class="col-set">4</td>
+                <td class="col-rep">8 - 10</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="col-ex">Wide-Grip Lat Pulldown</td>
+                <td class="col-set">3</td>
+                <td class="col-rep">10 - 12</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="col-ex">Dumbbell Lateral Raises</td>
+                <td class="col-set">4</td>
+                <td class="col-rep">12 - 15</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="col-ex">Cable Triceps Rope Pushdown</td>
+                <td class="col-set">3</td>
+                <td class="col-rep">10 - 12</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="col-ex">Incline Dumbbell Biceps Curl</td>
+                <td class="col-set">3</td>
+                <td class="col-rep">10 - 12</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- DAY 2 -->
+    <h3>DAY 2: LOWER BODY A (Hamstrings, Lower Back & Core)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th class="col-ex">Exercise Name</th>
+                <th class="col-set">Sets</th>
+                <th class="col-rep">Target Reps</th>
+                <th class="col-wk">Week 1</th>
+                <th class="col-wk">Week 2</th>
+                <th class="col-wk">Week 3</th>
+                <th class="col-wk">Week 4</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col-ex">Dumbbell Romanian Deadlifts (RDL)</td>
+                <td class="col-set">4</td>
+                <td class="col-rep">8 - 10</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="col-ex">Leg Press Machine (Feet High & Wide)</td>
+                <td class="col-set">4</td>
+                <td class="col-rep">10 - 12</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="col-ex">Seated Leg Curl Machine</td>
+                <td class="col-set">4</td>
+                <td class="col-rep">12 - 15</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="col-ex">Dumbbell Goblet Squat</td>
+                <td class="col-set">3</td>
+                <td class="col-rep">10 - 12</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="col-ex">Captain's Chair Leg Raises (Core)</td>
+                <td class="col-set">3</td>
+                <td class="col-rep">15 - 20</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- DAY 3 -->
+    <h3>DAY 3: UPPER BODY B (Chest Thickness & Shoulder Care)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th class="col-ex">Exercise Name</th>
+                <th class="col-set">Sets</th>
+                <th class="col-rep">Target Reps</th>
+                <th class="col-wk">Week 1</th>
+                <th class="col-wk">Week 2</th>
+                <th class="col-wk">Week 3</th>
+                <th class="col-wk">Week 4</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col-ex">Flat Dumbbell Press</td>
+                <td class="col-set">4</td>
+                <td class="col-rep">8 - 10</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="col-ex">Chest-Supported Row / Seated Machine</td>
+                <td class="col-set">4</td>
+                <td class="col-rep">10 - 12</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="col-ex">Cable Face Pulls (Shoulder Rehab)</td>
+                <td class="col-set">4</td>
+                <td class="col-rep">15 - 20</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="col-ex">Single-Arm Dumbbell Row</td>
+                <td class="col-set">3</td>
+                <td class="col-rep">10 - 12</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="col-ex">Overhead Cable Triceps Extension</td>
+                <td class="col-set">3</td>
+                <td class="col-rep">12 - 15</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="col-ex">Dumbbell Hammer Curls</td>
+                <td class="col-set">3</td>
+                <td class="col-rep">10 - 12</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- DAY 4 -->
+    <h3>DAY 4: LOWER BODY B (Quads, Glutes & Calves)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th class="col-ex">Exercise Name</th>
+                <th class="col-set">Sets</th>
+                <th class="col-rep">Target Reps</th>
+                <th class="col-wk">Week 1</th>
+                <th class="col-wk">Week 2</th>
+                <th class="col-wk">Week 3</th>
+                <th class="col-wk">Week 4</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col-ex">Smith Machine Squats OR Heavy Leg Press</td>
+                <td class="col-set">4</td>
+                <td class="col-rep">8 - 10</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="col-ex">Walking Dumbbell Lunges</td>
+                <td class="col-set">3</td>
+                <td class="col-rep">10 per leg</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="col-ex">Leg Extension Machine</td>
+                <td class="col-set">3</td>
+                <td class="col-rep">12 - 15</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="col-ex">Standing Calf Raises</td>
+                <td class="col-set">4</td>
+                <td class="col-rep">15 - 20</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="col-ex">Cable Ab Crunches or Plank Hold</td>
+                <td class="col-set">3</td>
+                <td class="col-rep">15 - 20</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
