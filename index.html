@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Monteiro Private Fitness & Nutrition Suite</title>
+    
+    <!-- iPhone 16 Full-Screen Web App Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Monteiro Suite">
+    <link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=180&h=180&fit=crop">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* LUXURY DESIGN SYSTEM (ROLEX / PORSCHE / CHANEL / HERMÈS) */
+        :root {
+            --bg-dark: #070a10;
+            --card-bg: rgba(18, 25, 41, 0.75);
+            --card-border: rgba(212, 175, 55, 0.25);
+            --gold: #d4af37;
+            --gold-light: #fef08a;
+            --gold-gradient: linear-gradient(135deg, #d4af37 0%, #fef08a 50%, #996515 100%);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            
+            /* Tiago Theme Default (Porsche Emerald + Rolex Gold) */
+            --accent: #10b981;
+            --accent-glow: rgba(16, 185, 129, 0.25);
+            --profile-gradient: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
+        }
+
+        /* Márcia Theme Dynamic Class */
+        body.marcia-theme {
+            --accent: #f472b6;
+            --accent-glow: rgba(244, 114, 182, 0.25);
+            --card-border: rgba(244, 114, 182, 0.3);
+            --profile-gradient: linear-gradient(135deg, #831843 0%, #500724 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, var(--accent-glow) 0%, transparent 40%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            padding: 12px;
+            max-width: 650px;
+            margin: 0 auto;
+            padding-top: calc(env(safe-area-inset-top) + 10px);
+            padding-bottom: calc(env(safe-area-inset-bottom) + 20px);
+            min-height: 100vh;
+        }
+
+        /* HEADER & LUXURY SWITCHER */
+        header {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+            text-align: center;
+            position: relative;
+        }
+
+        .brand-badge {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+
+        /* PROFILE TOGGLE BUTTONS */
+        .profile-switcher {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 4px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .profile-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .profile-btn.active-tiago {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .profile-btn.active-marcia {
+            background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(244, 114, 182, 0.4);
+        }
+
+        /* NAVIGATION TABS */
+        .nav-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+        }
+        .nav-tabs::-webkit-scrollbar { display: none; }
+
+        .nav-tab {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-secondary);
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-tab.active {
+            background: var(--accent);
+            color: #070a10;
+            font-weight: 800;
+            border-color: var(--accent);
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        /* CARDS & CONTENT SECTIONS */
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.35s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 14px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tag {
+            font-size: 0.68rem;
+            padding: 3px 8px;
+            border-radius: 6px;
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold-light);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            font-weight: 600;
+        }
+
+        /* LEDGER WORKOUT TABLES */
+        .table-wrapper { overflow-x: auto; }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 4px;
+            margin-top: 4px;
+        }
+
+        th {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 4px;
+            text-align: center;
+        }
+
+        th.exercise-col { text-align: left; padding-left: 8px; width: 35%; }
+
+        td {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 6px 4px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        td:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            border-left: 1px solid rgba(255, 255, 255, 0.03);
+            text-align: left;
+            padding-left: 8px;
+        }
+
+        td:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            border-right: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .ex-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: block;
+        }
+
+        .ex-target {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+        }
+
+        /* EXERCISE SWAPPER SELECTOR */
+        select.ex-swap {
+            background: transparent;
+            border: none;
+            color: var(--gold);
+            font-size: 0.75rem;
+            font-weight: 600;
+            width: 100%;
+            outline: none;
+            cursor: pointer;
+        }
+
+        input.log-input {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--accent);
+            text-align: center;
+            padding: 6px 2px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        input.log-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 8px var(--accent-glow);
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        /* NUTRITION & MEAL PLAN STYLE */
+        .macro-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .macro-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .macro-val {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+
+        .macro-lbl {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .meal-box {
+            background: rgba(0, 0, 0, 0.25);
+            border-left: 3px solid var(--accent);
+            padding: 10px 12px;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 10px;
+        }
+
+        .meal-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .meal-desc {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+
+        /* FOOTER & STATUS */
+        .save-banner {
+            font-size: 0.72rem;
+            text-align: center;
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 8px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+    </style>
+</head>
+<body id="appBody">
+
+    <!-- HEADER & DUAL PROFILE SWITCHER -->
+    <header>
+        <div class="brand-badge">
+            <i class="fa-solid fa-crown"></i> MONTEIRO PRIVATE SUITE
+        </div>
+        <h1 id="userHeading">Tiago Monteiro</h1>
+        
+        <div class="profile-switcher">
+            <button id="btnTiago" class="profile-btn active-tiago" onclick="switchProfile('tiago')">
+                <i class="fa-solid fa-car-side"></i> TIAGO
+            </button>
+            <button id="btnMarcia" class="profile-btn" onclick="switchProfile('marcia')">
+                <i class="fa-solid fa-gem"></i> MÁRCIA
+            </button>
+        </div>
+    </header>
+
+    <!-- LIVE SAVING BANNER -->
+    <div class="save-banner">
+        <i class="fa-solid fa-shield-halved"></i> Cloud LocalSync Active: Weight entries save live on iPhone 16
+    </div>
+
+    <!-- MAIN NAVIGATION TABS -->
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="switchMainTab(event, 'tabWorkout')">
+            <i class="fa-solid fa-dumbbell"></i> Daily Workouts
+        </button>
+        <button class="nav-tab" onclick="switchMainTab(event, 'tabMeal')">
+            <i class="fa-solid fa-utensils"></i> Meal Plans
+        </button>
+        <button class="nav-tab" onclick="switchMainTab(event, 'tabEndurance')">
+            <i class="fa-solid fa-heart-pulse"></i> Cardio & OTF
+        </button>
+    </div>
+
+    <!-- ==================== TAB 1: WORKOUT LEDGER ==================== -->
+    <div id="tabWorkout" class="tab-content active">
+        <!-- TIAGO WORKOUTS -->
+        <div id="tiagoWorkouts">
+            <!-- UPPER A -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fa-solid fa-chest"></i> Upper A (Chest & Lats)</div>
+                    <span class="tag">Planet Fitness</span>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="exercise-col">Exercise</th>
+                                <th>Target</th>
+                                <th>MON</th>
+                                <th>WED</th>
+                                <th>FRI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <select class="ex-swap" id="tiago_ex1" onchange="saveInput(this)">
+                                        <option value="Incline DB Press">Incline DB Press</option>
+                                        <option value="Chest Press Machine">Chest Press Machine</option>
+                                        <option value="Smith Incline Press">Smith Incline Press</option>
+                                    </select>
+                                </td>
+                                <td><span class="ex-target">4x8-10</span></td>
+                                <td><input type="text" class="log-input" id="t_u1_m" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="t_u1_w" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="t_u1_f" oninput="saveInput(this)"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select class="ex-swap" id="tiago_ex2" onchange="saveInput(this)">
+                                        <option value="Seated Cable Row">Seated Cable Row</option>
+                                        <option value="Hammer Strength Row">Hammer Strength Row</option>
+                                        <option value="T-Bar Row Machine">T-Bar Row Machine</option>
+                                    </select>
+                                </td>
+                                <td><span class="ex-target">4x8-10</span></td>
+                                <td><input type="text" class="log-input" id="t_u2_m" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="t_u2_w" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="t_u2_f" oninput="saveInput(this)"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select class="ex-swap" id="tiago_ex3" onchange="saveInput(this)">
+                                        <option value="Wide Lat Pulldown">Wide Lat Pulldown</option>
+                                        <option value="Neutral Lat Pulldown">Neutral Lat Pulldown</option>
+                                        <option value="Assisted Pull-ups">Assisted Pull-ups</option>
+                                    </select>
+                                </td>
+                                <td><span class="ex-target">3x10-12</span></td>
+                                <td><input type="text" class="log-input" id="t_u3_m" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="t_u3_w" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="t_u3_f" oninput="saveInput(this)"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select class="ex-swap" id="tiago_ex4" onchange="saveInput(this)">
+                                        <option value="Cable Biceps Curl">Cable Biceps Curl</option>
+                                        <option value="EZ Bar Preacher">EZ Bar Preacher</option>
+                                        <option value="DB Incline Curl">DB Incline Curl</option>
+                                    </select>
+                                </td>
+                                <td><span class="ex-target">3x10-12</span></td>
+                                <td><input type="text" class="log-input" id="t_u4_m" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="t_u4_w" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="t_u4_f" oninput="saveInput(this)"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- LOWER A -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fa-solid fa-person-running"></i> Lower A (Hamstrings & Glutes)</div>
+                    <span class="tag">Low Back Safe</span>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="exercise-col">Exercise</th>
+                                <th>Target</th>
+                                <th>TUE</th>
+                                <th>THU</th>
+                                <th>SAT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <select class="ex-swap" id="tiago_ex5" onchange="saveInput(this)">
+                                        <option value="DB Romanian Deadlift">DB Romanian Deadlift</option>
+                                        <option value="Smith Machine RDL">Smith Machine RDL</option>
+                                        <option value="Back Extension Machine">Back Extension Machine</option>
+                                    </select>
+                                </td>
+                                <td><span class="ex-target">4x8-10</span></td>
+                                <td><input type="text" class="log-input" id="t_l1_tu" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="t_l1_th" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="t_l1_sa" oninput="saveInput(this)"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select class="ex-swap" id="tiago_ex6" onchange="saveInput(this)">
+                                        <option value="Seated Leg Curl">Seated Leg Curl</option>
+                                        <option value="Lying Leg Curl">Lying Leg Curl</option>
+                                    </select>
+                                </td>
+                                <td><span class="ex-target">4x10-12</span></td>
+                                <td><input type="text" class="log-input" id="t_l2_tu" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="t_l2_th" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="t_l2_sa" oninput="saveInput(this)"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select class="ex-swap" id="tiago_ex7" onchange="saveInput(this)">
+                                        <option value="Leg Press Machine">Leg Press Machine</option>
+                                        <option value="Goblet Squat">Goblet Squat</option>
+                                    </select>
+                                </td>
+                                <td><span class="ex-target">4x10-12</span></td>
+                                <td><input type="text" class="log-input" id="t_l3_tu" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="t_l3_th" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="t_l3_sa" oninput="saveInput(this)"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- MÁRCIA WORKOUTS -->
+        <div id="marciaWorkouts" style="display:none;">
+            <!-- FULL BODY & OTF FLEX -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fa-solid fa-rose"></i> Glute & Body Sculpt</div>
+                    <span class="tag">Joint Friendly</span>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="exercise-col">Exercise</th>
+                                <th>Target</th>
+                                <th>MON</th>
+                                <th>WED</th>
+                                <th>FRI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <select class="ex-swap" id="marcia_ex1" onchange="saveInput(this)">
+                                        <option value="Glute Hip Thrust (Smith)">Glute Hip Thrust (Smith)</option>
+                                        <option value="DB Hip Thrust">DB Hip Thrust</option>
+                                        <option value="Cable Pull-Through">Cable Pull-Through</option>
+                                    </select>
+                                </td>
+                                <td><span class="ex-target">4x10-12</span></td>
+                                <td><input type="text" class="log-input" id="m_g1_m" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="m_g1_w" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="m_g1_f" oninput="saveInput(this)"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select class="ex-swap" id="marcia_ex2" onchange="saveInput(this)">
+                                        <option value="Seated Cable Row (Postural)">Seated Cable Row (Postural)</option>
+                                        <option value="Lat Pulldown (Lean Back)">Lat Pulldown (Lean Back)</option>
+                                    </select>
+                                </td>
+                                <td><span class="ex-target">3x12-15</span></td>
+                                <td><input type="text" class="log-input" id="m_g2_m" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="m_g2_w" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="m_g2_f" oninput="saveInput(this)"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select class="ex-swap" id="marcia_ex3" onchange="saveInput(this)">
+                                        <option value="DB Lateral Raises">DB Lateral Raises</option>
+                                        <option value="Cable Shoulder Fly">Cable Shoulder Fly</option>
+                                    </select>
+                                </td>
+                                <td><span class="ex-target">3x12-15</span></td>
+                                <td><input type="text" class="log-input" id="m_g3_m" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="m_g3_w" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="m_g3_f" oninput="saveInput(this)"></td>
+                            </tr>
+                            <tr>
+                                <td><span class="ex-name">OTF Splat Points</span><span class="ex-target">Daily Intensity</span></td>
+                                <td><span class="ex-target">12+ Pts</span></td>
+                                <td><input type="text" class="log-input" id="m_splat_m" placeholder="Splats" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="m_splat_w" placeholder="Splats" oninput="saveInput(this)"></td>
+                                <td><input type="text" class="log-input" id="m_splat_f" placeholder="Splats" oninput="saveInput(this)"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TAB 2: MEAL PLANS ==================== -->
+    <div id="tabMeal" class="tab-content">
+        <!-- TIAGO MEALS -->
+        <div id="tiagoMeals">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fa-solid fa-fire"></i> High-Protein Lean Blueprint</div>
+                    <span class="tag">Target: 2,500 kcal</span>
+                </div>
+                
+                <div class="macro-grid">
+                    <div class="macro-card">
+                        <div class="macro-val">2,500</div>
+                        <div class="macro-lbl">Calories</div>
+                    </div>
+                    <div class="macro-card">
+                        <div class="macro-val">185g</div>
+                        <div class="macro-lbl">Protein</div>
+                    </div>
+                    <div class="macro-card">
+                        <div class="macro-val">220g</div>
+                        <div class="macro-lbl">Carbs</div>
+                    </div>
+                </div>
+
+                <div class="meal-box">
+                    <div class="meal-title"><span>Breakfast (7:30 AM)</span> <span>~550 kcal</span></div>
+                    <div class="meal-desc">4 Whole eggs / egg white mix, 1 cup oatmeal with blueberries, black coffee or espresso.</div>
+                </div>
+                <div class="meal-box">
+                    <div class="meal-title"><span>Lunch (12:30 PM)</span> <span>~650 kcal</span></div>
+                    <div class="meal-desc">7oz Grilled chicken breast or lean sirloin, 1.5 cups jasmine rice, steamed broccoli, olive oil drizzle.</div>
+                </div>
+                <div class="meal-box">
+                    <div class="meal-title"><span>Pre-Workout / Afternoon</span> <span>~350 kcal</span></div>
+                    <div class="meal-desc">1 Scoop Whey Isolate, 1 Rice Cake with almond butter or 1 banana.</div>
+                </div>
+                <div class="meal-box">
+                    <div class="meal-title"><span>Dinner (7:30 PM)</span> <span>~650 kcal</span></div>
+                    <div class="meal-desc">8oz Salmon fillet or lean ground turkey, roasted sweet potatoes, mixed green salad.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MÁRCIA MEALS -->
+        <div id="marciaMeals" style="display:none;">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fa-solid fa-sparkles"></i> OTF Toning & Energy Blueprint</div>
+                    <span class="tag">Target: 1,800 kcal</span>
+                </div>
+                
+                <div class="macro-grid">
+                    <div class="macro-card">
+                        <div class="macro-val">1,800</div>
+                        <div class="macro-lbl">Calories</div>
+                    </div>
+                    <div class="macro-card">
+                        <div class="macro-val">140g</div>
+                        <div class="macro-lbl">Protein</div>
+                    </div>
+                    <div class="macro-card">
+                        <div class="macro-val">150g</div>
+                        <div class="macro-lbl">Carbs</div>
+                    </div>
+                </div>
+
+                <div class="meal-box">
+                    <div class="meal-title"><span>Breakfast (OTF Fuel)</span> <span>~400 kcal</span></div>
+                    <div class="meal-desc">Greek Yogurt parfait with fresh strawberries, chia seeds, and 1 slice sprouted whole-grain toast.</div>
+                </div>
+                <div class="meal-box">
+                    <div class="meal-title"><span>Lunch</span> <span>~480 kcal</span></div>
+                    <div class="meal-desc">Large Mediterranean bowl: 5oz grilled chicken, quinoa, cucumber, cherry tomatoes, feta & lemon dressing.</div>
+                </div>
+                <div class="meal-box">
+                    <div class="meal-title"><span>Afternoon Toning Snack</span> <span>~250 kcal</span></div>
+                    <div class="meal-desc">Protein smoothie (Whey + almond milk + spinach) or hard-boiled eggs with sea salt.</div>
+                </div>
+                <div class="meal-box">
+                    <div class="meal-title"><span>Dinner</span> <span>~520 kcal</span></div>
+                    <div class="meal-desc">Pan-seared white fish or shrimp, air-fried zucchini fries, and roasted asparagus.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TAB 3: CARDIO & ENDURANCE ==================== -->
+    <div id="tabEndurance" class="tab-content">
+        <!-- TIAGO CARDIO -->
+        <div id="tiagoCardio">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fa-solid fa-gauge-high"></i> High-Performance Schedule</div>
+                    <span class="tag">Porsche Energy</span>
+                </div>
+                <div class="meal-box">
+                    <div class="meal-title"><span>Sub-22 Min 5-Mile Run</span> <span>2x / Week</span></div>
+                    <div class="meal-desc">Pacing target: 4:24 min/mile average. Perform on non-heavy leg days to preserve hamstring power.</div>
+                </div>
+                <div class="meal-box">
+                    <div class="meal-title"><span>18 MPH Treadmill Sprints</span> <span>1x / Week</span></div>
+                    <div class="meal-desc">10 Rounds: 30-second max sprint @ 18 mph, 60-second recovery walk.</div>
+                </div>
+                <div class="meal-box">
+                    <div class="meal-title"><span>75–90 Mile Long Road Ride</span> <span>Weekend</span></div>
+                    <div class="meal-desc">Carb-load pre-ride with 60g intra-ride cyclic dextrin/electrolytes.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MÁRCIA CARDIO -->
+        <div id="marciaCardio" style="display:none;">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fa-solid fa-heart"></i> OrangeTheory & Knee Preservation</div>
+                    <span class="tag">Chanel Precision</span>
+                </div>
+                <div class="meal-box">
+                    <div class="meal-title"><span>OTF Treadmill Protocol</span> <span>5-6x / Week</span></div>
+                    <div class="meal-desc">Focus on power walking at high inclines (8% - 12%) when knees feel sensitive. Provides max calorie burn with zero joint impact!</div>
+                </div>
+                <div class="meal-box">
+                    <div class="meal-title"><span>Splat Point Goal</span> <span>12 - 20 Points</span></div>
+                    <div class="meal-desc">Maintain Orange & Red heart rate zones for optimal post-exercise oxygen consumption (EPOC fat burn).</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT: LOGIC & AUTOSAVE -->
+    <script>
+        let currentProfile = 'tiago';
+
+        // SWITCH PROFILE (TIAGO VS MÁRCIA)
+        function switchProfile(profile) {
+            currentProfile = profile;
+            const body = document.getElementById('appBody');
+            const btnT = document.getElementById('btnTiago');
+            const btnM = document.getElementById('btnMarcia');
+            const heading = document.getElementById('userHeading');
+
+            if (profile === 'marcia') {
+                body.classList.add('marcia-theme');
+                btnM.className = 'profile-btn active-marcia';
+                btnT.className = 'profile-btn';
+                heading.innerText = "Márcia Monteiro";
+
+                // Toggle Profile Views
+                document.getElementById('tiagoWorkouts').style.display = 'none';
+                document.getElementById('marciaWorkouts').style.display = 'block';
+                document.getElementById('tiagoMeals').style.display = 'none';
+                document.getElementById('marciaMeals').style.display = 'block';
+                document.getElementById('tiagoCardio').style.display = 'none';
+                document.getElementById('marciaCardio').style.display = 'block';
+            } else {
+                body.classList.remove('marcia-theme');
+                btnT.className = 'profile-btn active-tiago';
+                btnM.className = 'profile-btn';
+                heading.innerText = "Tiago Monteiro";
+
+                // Toggle Profile Views
+                document.getElementById('tiagoWorkouts').style.display = 'block';
+                document.getElementById('marciaWorkouts').style.display = 'none';
+                document.getElementById('tiagoMeals').style.display = 'block';
+                document.getElementById('marciaMeals').style.display = 'none';
+                document.getElementById('tiagoCardio').style.display = 'block';
+                document.getElementById('marciaCardio').style.display = 'none';
+            }
+            localStorage.setItem('monteiro_last_profile', profile);
+        }
+
+        // NAVIGATION TABS SWITCHER
+        function switchMainTab(evt, tabId) {
+            let contents = document.getElementsByClassName("tab-content");
+            for (let c of contents) { c.classList.remove("active"); }
+            
+            let tabs = document.getElementsByClassName("nav-tab");
+            for (let t of tabs) { t.classList.remove("active"); }
+
+            document.getElementById(tabId).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        // SAVE ALL INPUTS AUTOMATICALLY TO LOCALSTORAGE
+        function saveInput(element) {
+            const id = element.id;
+            const val = element.value;
+            localStorage.setItem('monteiro_' + id, val);
+        }
+
+        // LOAD SAVED DATA ON APP STARTUP
+        window.onload = function() {
+            // Restore Inputs
+            const inputs = document.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                const saved = localStorage.getItem('monteiro_' + input.id);
+                if (saved !== null) {
+                    input.value = saved;
+                }
+            });
+
+            // Restore Profile Choice
+            const lastProfile = localStorage.getItem('monteiro_last_profile');
+            if (lastProfile === 'marcia') {
+                switchProfile('marcia');
+            }
+        };
+    </script>
+</body>
+</html>
